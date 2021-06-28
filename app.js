@@ -18,6 +18,17 @@ function outputCurrentCalc(operator, initialResult, enteredValue){
 defaultValue = 0;
 currentResult = defaultValue;
 
+function addEventLogs(operation, numBefore, numEntered, opResult){
+    const activityLog = {
+        opPerformed : operation,
+        iniNum : numBefore,
+        userIp : numEntered,
+        resultOp : opResult
+    }
+    logEntries.push(activityLog);
+    console.log(logEntries);
+}
+
 // Addition Function
 addBtn.addEventListener('click',add);
 function add(){
@@ -26,13 +37,7 @@ function add(){
     currentResult = currentResult + enteredNumber;
     currentResultOutput.textContent = currentResult;
     outputCurrentCalc('+', initialValue, enteredNumber);
-    const logEntry = {
-        operation: "Add",
-        previousNumber : initialValue,
-        numberEntered : enteredNumber,
-        sum : currentResult
-    }
-    logEntries.push( logEntry );  // adds the current calculation to the logEntries array 
+    addEventLogs("ADD",initialValue,enteredNumber,currentResult); 
 }
 
 // Subtraction
@@ -43,13 +48,7 @@ function subtract(){
     currentResult = currentResult - enteredNumber;
     currentResultOutput.textContent = currentResult;
     outputCurrentCalc('-', initialValue, enteredNumber);
-    const logEntry = {
-        operation: "Subtract",
-        previousNumber : initialValue,
-        numberEntered : enteredNumber,
-        difference : currentResult
-    }
-    logEntries.push( logEntry ); 
+    addEventLogs("SUBTRACT",initialValue,enteredNumber,currentResult); 
 }
 
 // Multiplication
@@ -60,13 +59,7 @@ function multiply(){
     currentResult = currentResult * enteredNumber;
     currentResultOutput.textContent = currentResult;
     outputCurrentCalc('*', initialValue, enteredNumber);
-    const logEntry = {
-        operation: "Multiply",
-        previousNumber : initialValue,
-        numberEntered : enteredNumber,
-        product : currentResult
-    }
-    logEntries.push( logEntry ); 
+    addEventLogs("MULTIPLY",initialValue,enteredNumber,currentResult); 
 }
 
 // Division
@@ -77,11 +70,5 @@ function divide(){
     currentResult = currentResult / enteredNumber;
     currentResultOutput.textContent = currentResult;
     outputCurrentCalc('/', initialValue, enteredNumber);
-    const logEntry = {
-        operation: "Divide",
-        previousNumber : initialValue,
-        numberEntered : enteredNumber,
-        quotient : currentResult
-    }
-    logEntries.push( logEntry ); 
+    addEventLogs("DIVIDE",initialValue,enteredNumber,currentResult); 
 }
